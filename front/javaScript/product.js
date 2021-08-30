@@ -34,16 +34,19 @@ fetch(`http://localhost:3000/api/cameras/${cameraId}`)
 function addCameraToBasket(cameraObject) {
 
   const quantityElementValue = document.getElementById("product-quantity").value;
-
+  const recap = {
+    id: cameraObject._id,
+    quantity: quantityElementValue,
+  }
   if (!window.localStorage.getItem("camera-basket") ){
-    const cameraList = [cameraObject._id, quantityElementValue];
+    const cameraList = [recap];
     const cameraListJson = JSON.stringify(cameraList);
     window.localStorage.setItem("camera-basket", cameraListJson);
 
   }else{
     let cameraListJson = window.localStorage.getItem("camera-basket");
     const cameraList = JSON.parse(cameraListJson);
-    cameraList.push(cameraObject._id, quantityElementValue);
+    cameraList.push(recap);
     cameraListJson = JSON.stringify(cameraList);
     window.localStorage.setItem("camera-basket", cameraListJson);
   }

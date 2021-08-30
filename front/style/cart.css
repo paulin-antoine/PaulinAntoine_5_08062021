@@ -56,19 +56,28 @@ h1 {
     background-color: #707070;
     margin-top: -17px;
 }
+
 #basket ul {
     display: flex;
     justify-content: space-between;
     width: 90%;
     padding-top: 17px;
     list-style: none;
-    color: white;
+    
+}
+#basket-line-2 {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
 }
 #noProduct {
-    width : 127px;
+    width : 140px;
     margin: auto;
     margin-top: 15px;
+    font-size: 1.1em;
 }
+
 footer {
     display: flex;
     background-color: #F3E9F1;

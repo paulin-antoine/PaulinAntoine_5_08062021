@@ -25,7 +25,6 @@ fetch(`http://localhost:3000/api/cameras/${cameraId}`)
   basketButton.addEventListener("click", () => {
     addCameraToBasket(camera);});
   lenseChoice(camera);
-  quantityItem();
   priceItem(camera);
 });
 
@@ -33,20 +32,29 @@ fetch(`http://localhost:3000/api/cameras/${cameraId}`)
 
 function addCameraToBasket(cameraObject) {
 
-  const quantityElementValue = document.getElementById("product-quantity").value;
-  const recap = {
-    id: cameraObject._id,
-    quantity: quantityElementValue,
-  }
   if (!window.localStorage.getItem("camera-basket") ){
-    const cameraList = [recap];
+    const cameraList = [cameraObject];
+    //Ajout de la clé "quantity" pour chaque item dans le localStorage
+    cameraObject["quantity"] = 1;
     const cameraListJson = JSON.stringify(cameraList);
     window.localStorage.setItem("camera-basket", cameraListJson);
-
+    
   }else{
     let cameraListJson = window.localStorage.getItem("camera-basket");
     const cameraList = JSON.parse(cameraListJson);
-    cameraList.push(recap);
+    let isAlreadyInStorage = false;
+    for (camera of cameraList){
+
+      if (camera["_id"]  == cameraObject["_id"]){
+
+        isAlreadyInStorage = true;
+        camera["quantity"] += 1;
+      }
+    }
+    if (isAlreadyInStorage == false){
+    cameraObject["quantity"] = 1;
+    cameraList.push(cameraObject);
+    }
     cameraListJson = JSON.stringify(cameraList);
     window.localStorage.setItem("camera-basket", cameraListJson);
   }
@@ -55,7 +63,7 @@ function addCameraToBasket(cameraObject) {
     alertAddProduct.innerHTML = `
       <p>Votre article a été ajouté au panier !</p>
     `
- 
+  
   
 
 }
@@ -72,9 +80,10 @@ function lenseChoice (cameraLense) {
   </form>
   `
    let elt = document.getElementById("choice").addEventListener("change", function () {
-   let eltChecked = document.getElementsByClassName("lense");
-  for ( i = 0; i < eltChecked.length; i++) {
+    let eltChecked = document.getElementsByClassName("lense");
+    for ( i = 0; i < eltChecked.length; i++) {
     if ( eltChecked[i].checked ) break;
+
   }
   console.log(eltChecked[i].value);
   localStorage.setItem("Option", eltChecked[i].value);
@@ -82,25 +91,7 @@ function lenseChoice (cameraLense) {
   
 }
 
-const quantityValue = `
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-  <option value="6">6</option>
-  <option value="7">7</option>
-  <option value="8">8</option>
-  <option value="9">9</option>
 
-  `;
-
-function quantityItem () {
-  
-  const quantityElement = document.getElementById("product-quantity");
-  quantityElement.innerHTML = quantityValue;
-
-}
 
 function priceItem (cameraPrice) {
   const price1 = document.getElementById("price");
@@ -111,6 +102,8 @@ function priceItem (cameraPrice) {
 
   `
 }
+
+
 
 
 

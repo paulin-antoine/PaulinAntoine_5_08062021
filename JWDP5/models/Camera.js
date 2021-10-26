@@ -9,6 +9,7 @@ const cameras = [
     "price": 49900,
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "imageUrl": "vcam_1.jpg"
+    
   },
   {
     "lenses": [

@@ -99,10 +99,103 @@ h1 {
 #bigTotal {
     width: 150px;
     height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;;
+    margin-top: 4px;
+    font-size: 1.2em;
+    border: solid #707070 1px;
+    border-radius: 8px;
+    background-color: white;
+}
+#bigTotal-box {
+    width: 152px;
+    height: 80px;
+    margin: auto; 
+    margin-top: 50px;; 
+    border: solid #707070 1px;
+    border-radius: 10px;
+    background-color: #707070;
+}
+#bigTotal-box p {
+    color: white;
+    font-weight: bold;
+    width: 50px;
     margin: auto;
-    margin-top: 20px;
-    border: solid black 1px;
+    margin-top: 5px;
+}
+#total-price {
+
+}
+
+#info-block {
+    width: 65%;
+    height: 400px;
+    margin: auto;
+    margin-top: 50px;
+    background: linear-gradient(70deg, #D8C8FD,#FFF6E0 );
+    padding: 0 20px 20px 20px;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px silver;
+    
+}
+
+h2 {
+    width: 285px;
+    margin: auto;
+    padding-top: 20px;
+    color: #373737;
+    font-size: 1.5em;
+    
+}
+#personal-info{
+    width: 95%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    margin: auto;
+    margin-top: 7%;
+}
+#Fname-Lname-Mail {
+    display: inline-block;
+}
+#info-1{
+    width: 480px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#info-2{
+    width: 480px;
+}
+#input-mail{
+    width: 472px;
+}
+
+label {
+    display: block;
+    font-size: 1.2em;
+    width: 110px;
+    margin-top: 10px;      
+}
+.input-info{
+    width: 220px;
+    height: 25px;
+    border: solid silver 1px;
+    border-radius: 5px;
+}
+#send-info {
     background-color: #FFA75E;
+    color: white;
+    border: 0px;
+    border-bottom: 3px solid #FF885C;
+    border-radius: 5px;
+    width: 200px;
+    height: 43px;
+    box-shadow: 3px 3px 5px silver;
+    font-size: 1.2em;
 }
 
 footer {

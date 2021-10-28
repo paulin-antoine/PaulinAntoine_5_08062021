@@ -26,7 +26,7 @@ function displayProductList(products) {
     basketLine2.innerHTML = `<ul id="basket-line-1">
                                 <li>Nom</li>
                                 <li>Prix</li>
-                                <li>Quantity</li>
+                                <li>Quantité</li>
                                 <li>Total</li>
                                 <li></li>
                             `
@@ -78,7 +78,7 @@ function displayProductList(products) {
 
         let bigTotal = document.getElementById("bigTotal");
 
-        bigTotal.innerHTML = `${resultTotal.toFixed(2)}`;
+        bigTotal.innerHTML = ` <div id="total-price">${resultTotal.toFixed(2)} €</div>`;
         
     }
 

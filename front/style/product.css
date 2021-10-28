@@ -69,13 +69,16 @@ form {
 #basketButton {
     display: block;
     width: 175px;
-    height: 40px;
+    height: 50px;
     background-color: #FFA75E;
     margin: auto;
     margin-top: 20px;
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: white;
-    
+    border: 0px;
+    border-bottom: 3px solid #FF885C;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px silver;
 }
 
 #alert {

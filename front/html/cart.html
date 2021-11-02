@@ -27,35 +27,36 @@
     </div>
         <div id="info-block">
             <h2>Passez votre commande</h2>
-                <div id="personal-info">
-                    
+            <form>
+                <div id="personal-info">  
                     <div id="Fname-Lname-Mail">
                         <div id="info-1">    
                                 <div class="block">
-                                <label for="firstname">Prenom</label>
-                                    <input class="input-info" name="firstname">
+                                <label for="firstname" >Prenom</label>
+                                    <input id="firstname" class="input-info" name="firstname" pattern="[a-zA-Z- ]+[a-zA-Z]+">
                                 </div>
                                 <div class="block">                                                             
                                 <label for="lastname">Nom</label>
-                                    <input class="input-info" name="lastname">
+                                    <input id="lastname" class="input-info" name="lastname" pattern="[ a-zA-Z- ]+[a-zA-Z]+">
                                 </div>                           
                         </div>
                         <div id="info-2">
                                 <label for="mail">Mail</label>
-                                    <input id="input-mail" class="input-info" name="mail">                        
+                                    <input id="input-mail" class="input-info" name="mail" pattern="[a-z0-9]+@[a-z0-9]+.[a-z]{2,4}">                        
                         </div><br>
-                        <button id="send-info">Valider</button>
+                        <button type="submit" id="send-info" onclick="sendToApi()">Valider</button> 
                     </div>
                     <div id="info-3">
                             <label for="adress">Adresse</label>
-                                <input class="input-info" name="adress">
+                                <input id="adress" class="input-info" name="adress" pattern="[0-9 ]{1,3}[a-zA-Z-' ]+[a-zA-Z-' ]+[a-zA-Z'-]+">
                             <label for="city">Ville</label>
-                                <input class="input-info" name="city">
+                                <input id="city" class="input-info" name="city" pattern="[a-zA-Z-' ]+[a-zA-Z-' ]+[a-zA-Z'-]+">
                             <label for="postal-code">Code postal</label>
-                                <input class="input-info" name="postal-code">
+                                <input id="postal-code" class="input-info" name="postal-code" pattern="[0-9]{5,5}">
                         
                     </div>
                 </div>
+            </form>
             </div>
     <footer>
         <p>ORINOCO - Site de vente en ligne</p>

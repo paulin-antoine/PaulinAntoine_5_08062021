@@ -124,9 +124,6 @@ h1 {
     margin: auto;
     margin-top: 5px;
 }
-#total-price {
-
-}
 
 #info-block {
     width: 65%;
@@ -186,6 +183,16 @@ label {
     border: solid silver 1px;
     border-radius: 5px;
 }
+#firstname:invalid, #lastname:invalid, 
+#input-mail:invalid, #adress:invalid, #city:invalid, #postal-code:invalid {
+    border: 2px solid red;
+}
+#firstname:valid, #lastname:valid,
+#input-mail:valid, #adress:valid, #city:valid, #postal-code:valid {
+    border: 1px solid lightblue;
+}
+
+
 #send-info {
     background-color: #FFA75E;
     color: white;

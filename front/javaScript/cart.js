@@ -74,7 +74,7 @@ function displayProductList(products) {
        // let bigTotal = document.getElementById("#bigTotal");
         
         resultTotal += Number(cameraDecimalPrice * camera.quantity);
-        console.log(resultTotal)
+        
 
         let bigTotal = document.getElementById("bigTotal");
 
@@ -152,16 +152,61 @@ function deleteItem (element){
        noProduct.innerHTML = `<p id="noProduct">Le panier est vide !<p>`  
 
     }
-    
-   
+      
 }
 
 
 displayCart();
 
+//Fonction pour envoyer les données du formulaire au back-end
 
-// 4. Gérer le formulaire d'envoi des commandes et redirection sur la page de confirmation
+let order = 0;
+  
+function sendToApi() {
+    let firstname = document.getElementById('firstname').value;
+    let lastname = document.getElementById('lastname').value;
+    let adress = document.getElementById('adress').value;
+    let postalCode = document.getElementById('postal-code').value;
+    let mail = document.getElementById('input-mail').value;
+    let city = document.getElementById('city').value;
 
+    let product = [];
 
+    for (camera of productList) {
 
+        product.push(camera._id);
+    }
+
+    let user ={
+
+        contact: {
+            firstName: firstname,
+            lastName: lastname,
+            address: adress + ' ' + postalCode,
+            city: city,
+            email: mail
+          },
+          products: product, 
+    
+    } 
+
+    
+
+    fetch('http://localhost:3000/api/cameras/order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(user)
+      })
+      .then((response) => response.json())
+      .then((json) => { console.log(json); order = json.orderId; addOrderIdInLocalStorage(); document.location.href="order.html";  })
+      
+      
+  }
+
+function addOrderIdInLocalStorage () {
+
+    window.localStorage.setItem("orderId", JSON.stringify(order));
+}
 

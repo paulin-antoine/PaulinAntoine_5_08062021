@@ -7,11 +7,13 @@ const productList = JSON.parse(window.localStorage.getItem("camera-basket"));
 // 2. Récupérer les informations de chaque produit sur le serveur
 function displayCart() {
     const recapLine2 = document.getElementById("basket-line-2");
-
+    const bigTotal = document.getElementById("bigTotal");
     if (productList == null) {
         recapLine2.innerHTML = `
             <p id="noProduct">Le panier est vide !<p>
-        `
+        `;
+        bigTotal.innerHTML = `0.00€`
+
     }
 
     else {
@@ -62,9 +64,9 @@ function displayProductList(products) {
         productElement.innerHTML = `
             
             <li>${camera.name}</li>
-            <li>${cameraDecimalPrice}</li>
+            <li>${cameraDecimalPrice} €</li>
             <li id="select${i}">${camera.select}</li>
-            <li>${cameraDecimalPrice * camera.quantity}</li>
+            <li id="sum${i}">${cameraDecimalPrice * camera.quantity} €</li>
             <li onClick="deleteItem(${i})" class="icon-trash"><i class="far fa-trash-alt"></i>
               
         `
@@ -93,16 +95,6 @@ function change(element){
     let newPrice = (productList[val].price * Number(element.value))/1000;
     totalPrice.innerHTML = `${newPrice}`
     
-
-   /* if (element.value == 2){ //A la place du if je dois mettre à jour la quantity de la camera 
-        //correspondante dans localStorage.
-        let option2 = document.getElementById(`option2${val}`);
-        option2.setAttribute("selected","")
-        console.log(option2);
-        
-         
-    }*/ 
-    
     //Incrémentation et décrémentation de la quantité dans le localstorage
     if (element.value > productList[val].quantity) {
 
@@ -113,7 +105,7 @@ function change(element){
         resultTotal += (productList[val].price)/1000;
 
         bigTotal.innerHTML = `${resultTotal.toFixed(2)}`;
-         
+        
         
     }else if (element.value < productList[val].quantity){
 
@@ -135,7 +127,8 @@ function change(element){
 function deleteItem (element){
 
     let productList2 = JSON.parse(window.localStorage.getItem("camera-basket"));
-
+    let newbigTotal = document.getElementById("bigTotal");
+    let sum = document.getElementById(`sum${element}`);
     if (productList2.length > 1){
         
         productList2.splice(element, element+1);
@@ -144,13 +137,16 @@ function deleteItem (element){
         let clearLine = document.getElementById(`detailProduct-${element}`);
         const basketLine2 = document.getElementById("basket-line-2");
         basketLine2.removeChild(clearLine);
-        
+        let newSum = sum.textContent;
+        let newSum2 = newSum.split('€');
+        resultTotal = (Number(resultTotal).toFixed(2) - Number(newSum2[0]).toFixed(2)).toFixed(2);
+        newbigTotal.innerHTML = `${resultTotal} €`;
     }else{
 
        window.localStorage.clear();
        const noProduct = document.getElementById("basket-line-2"); 
-       noProduct.innerHTML = `<p id="noProduct">Le panier est vide !<p>`  
-
+       noProduct.innerHTML = `<p id="noProduct">Le panier est vide !<p>`;
+       newbigTotal.innerHTML = `0.00 €`;
     }
       
 }
@@ -207,6 +203,7 @@ function sendToApi() {
 
 function addOrderIdInLocalStorage () {
 
-    window.localStorage.setItem("orderId", JSON.stringify(order));
+    window.localStorage.setItem("orderId", order);
+    window.localStorage.setItem("price", resultTotal.toFixed(2));
 }
 

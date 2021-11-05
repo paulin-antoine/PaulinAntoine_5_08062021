@@ -147,9 +147,9 @@ h2 {
     
 }
 #personal-info{
-    width: 95%;
+    width: 750px;;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: row;
     margin: auto;
     margin-top: 7%;
@@ -183,15 +183,6 @@ label {
     border: solid silver 1px;
     border-radius: 5px;
 }
-#firstname:invalid, #lastname:invalid, 
-#input-mail:invalid, #adress:invalid, #city:invalid, #postal-code:invalid {
-    border: 2px solid red;
-}
-#firstname:valid, #lastname:valid,
-#input-mail:valid, #adress:valid, #city:valid, #postal-code:valid {
-    border: 1px solid lightblue;
-}
-
 
 #send-info {
     background-color: #FFA75E;
@@ -203,6 +194,11 @@ label {
     height: 43px;
     box-shadow: 3px 3px 5px silver;
     font-size: 1.2em;
+}
+
+#firstname:invalid, #lastname:invalid, #city:invalid,
+#adress:invalid, #postal-code:invalid, #input-mail:invalid {
+    border: solid red 2px ;
 }
 
 footer {

@@ -36,12 +36,6 @@ function displayProductList(products) {
     
     for (camera of products) {
 
-        //Construire le select en utilisant camera.quantity (camera.quantity correspond à l'option du select selectionné)
-       // camera["select"] = `<select onChange="change(this)"id="${i}">
-                          //  <option value="1">1</option>
-                         //   <option value="2">2</option>
-                         //   <option value="3">3</option>
-                         //   </select>`;
         camera["select"] = `<select onChange="change(this)"id="${i}">`
 
         for (let j = 0; j < 10; j++) {
@@ -104,7 +98,7 @@ function change(element){
         //Mise à jour du grand total    
         resultTotal += (productList[val].price)/1000;
 
-        bigTotal.innerHTML = `${resultTotal.toFixed(2)}`;
+        bigTotal.innerHTML = `${resultTotal.toFixed(2)} €`;
         
         
     }else if (element.value < productList[val].quantity){
@@ -115,7 +109,7 @@ function change(element){
         //Mise à jour du grand total     
         resultTotal -= (productList[val].price)/1000;
 
-        bigTotal.innerHTML = `${resultTotal.toFixed(2)}`;
+        bigTotal.innerHTML = `${resultTotal.toFixed(2)} €`;
         
     }
     
@@ -166,11 +160,22 @@ function sendToApi() {
     let mail = document.getElementById('input-mail').value;
     let city = document.getElementById('city').value;
 
+    let regexFirstname = /^[A-Z][a-zA-Z]+$/.test(firstname);
+    let regexLastname = /^[a-zA-Z '.-]*$/.test(lastname);
+    let regexMail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(mail);
+    let regexAdress = /[0-9 ]{1,3}[a-zA-Z-' ]+[a-zA-Z-' ]+[a-zA-Z'-]+$/.test(adress);
+    let regexCity = /[a-zA-Z-' ]+[a-zA-Z-' ]+[a-zA-Z'-]+$/.test(city);
+    let regexPostalCode = /^(([0-8][0-9])|(9[0-5]))[0-9]{3}$/.test(postalCode);
+    
     let product = [];
 
+    try {
     for (camera of productList) {
 
         product.push(camera._id);
+    }
+    } catch (error) {
+        console.error(error);
     }
 
     let user ={
@@ -186,8 +191,15 @@ function sendToApi() {
     
     } 
 
-    
-
+    if  (!firstname || !lastname || !adress || !postalCode || !mail || !city) {
+            alert("Veuillez renseigner tout les champs");  
+    }else if (regexFirstname == false || regexLastname == false || regexMail == false ||
+              regexAdress == false || regexCity == false || regexPostalCode == false)
+               {
+                alert("Veuillez renseigner correctement les champs en rouge");
+                              
+    }else{
+        
     fetch('http://localhost:3000/api/cameras/order', {
         method: 'POST',
         headers: {
@@ -196,14 +208,19 @@ function sendToApi() {
         body: JSON.stringify(user)
       })
       .then((response) => response.json())
-      .then((json) => { console.log(json); order = json.orderId; addOrderIdInLocalStorage(); document.location.href="order.html";  })
-      
-      
+      .then((json) => { order = json.orderId;
+        if (!window.localStorage.getItem("camera-basket")){
+            alert("Votre panier est vide !");
+        }else{
+            addOrderIdInLocalStorage();    
+            document.location.href="order.html";  
+        }})
+    }  
   }
 
 function addOrderIdInLocalStorage () {
-
+    let decimalTotal = (resultTotal).toFixed(2);
     window.localStorage.setItem("orderId", order);
-    window.localStorage.setItem("price", resultTotal.toFixed(2));
-}
+    window.localStorage.setItem("price", decimalTotal);
+    }
 

@@ -1,12 +1,10 @@
-
 const cameraListElement = document.getElementById("cameraList");
-
 
 function renderCameraList(cameras) {
   for (camera of cameras) {
-    const cameraElement = document.createElement("a")
-    cameraElement.setAttribute("href",`product.html?id=${camera._id}`)
-    const cameraPrice = parseFloat(camera.price)/1000;
+    const cameraElement = document.createElement("a");
+    cameraElement.setAttribute("href", `product.html?id=${camera._id}`);
+    const cameraPrice = parseFloat(camera.price) / 1000;
     const cameraPriceDecimal = cameraPrice.toFixed(2);
     cameraElement.innerHTML = `
       <div class="bcg-1">
@@ -19,16 +17,11 @@ function renderCameraList(cameras) {
       </div>
       <button id="details-product">Détails</button>
       <div>
-    `
+    `;
     cameraListElement.appendChild(cameraElement);
-    
   }
- 
 }
 
-
 fetch("http://localhost:3000/api/cameras")
-.then(response => response.json())
-.then(cameras => renderCameraList(cameras));
-
-
+  .then((response) => response.json())
+  .then((cameras) => renderCameraList(cameras));

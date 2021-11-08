@@ -6,7 +6,3 @@ const orderId = window.localStorage.getItem("orderId");
 
 price.innerHTML = `${priceInLocalStorage}`;
 id.innerHTML = `${orderId}`;
-
-
-
-

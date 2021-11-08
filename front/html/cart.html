@@ -43,8 +43,8 @@
                         <div id="info-2">
                                 <label for="mail">Mail</label>
                                     <input id="input-mail" class="input-info" name="mail" type="email" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$">                        
-                        </div><br>
-                        <button type="submit" id="send-info" onclick="sendToApi()">Valider</button> 
+                        </div>
+                         
                     </div>
                     <div id="info-3">
                             <label for="adress">Adresse</label>
@@ -52,14 +52,15 @@
                             <label for="city">Ville</label>
                                 <input id="city" class="input-info" name="city" pattern="[a-zA-Z-' ]+[a-zA-Z-' ]+[a-zA-Z'-]+$">
                             <label for="postal-code">Code postal</label>
-                                <input id="postal-code" class="input-info" name="postal-code" pattern="^(([0-8][0-9])|(9[0-5]))[0-9]{3}$">
-                        
+                                <input id="postal-code" class="input-info" name="postal-code" pattern="^(([0-8][0-9])|(9[0-5]))[0-9]{3}$"><br>
+                            <button type="submit" id="send-info" onclick="sendToApi()">Valider</button>
                     </div>
                 </div>
             </form>
             </div>
     <footer>
-        <p>ORINOCO - Site de vente en ligne</p>
+        <p>- ORINOCO -</p>
+        <p>Site de vente en ligne</p>
     </footer>
     <script src="../javaScript/cart.js"></script>
 </body>

@@ -73,6 +73,7 @@ form {
     background-color: #FFA75E;
     margin: auto;
     margin-top: 20px;
+    margin-bottom: 79px;
     font-size: 1.1em;
     color: white;
     border: 0px;
@@ -88,28 +89,73 @@ form {
     font-size: 1.2em;
 }
 
-#quantity {
-    margin-left: 50px;
-    margin-top: -20px;
-}
-
 #price {
     margin-left: 50px;
 }
 
-
-
 footer {
     display: flex;
+    flex-direction: column;
     background-color: #F3E9F1;
-    margin-top: 8%;
-    font-size: 1.5em;
     width: 100%;
-    height: 100px;
-    align-items: center;
-    justify-content: center;      
+    height: 100px; 
 }
 
 footer p {
-    color: grey;   
+    color: #373737;
+    margin: auto;
+    font-size: 1.3em;   
+}
+
+@media screen and (max-width: 600px){
+
+    #item { 
+        width: 320px; 
+        margin-top: 130px; 
+    }
+    #item img {
+        display: block;
+        width: 280px;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;    
+    }
+    #description {
+        margin: 0px 20px 0px 20px;
+    }
+    
+    form {
+        margin: 0 20px 10px 20px;
+    }
+    #price {
+        margin-left: 20px;
+    }
+    #basketButton {
+        margin-bottom: 140px;
+    }
+}
+@media screen and (max-width: 280px){
+
+    #item { 
+        width: 260px;  
+    }
+    #item img {
+        width: 240px;  
+    }
+    #description {
+        margin: 0px 10px 0px 10px;
+    }
+    form {
+        margin: 0 10px 10px 10px;
+    }
+    #price {
+        margin-left: 10px;
+    }
+    #nav-cart {
+        display: flex;
+        flex-direction: column;
+        width: 60px;
+        height: 60px;
+        margin-right: 20px;
+    }
 }

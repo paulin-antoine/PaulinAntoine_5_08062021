@@ -66,9 +66,7 @@ function displayProductList(products) {
         `
         i++;
         basketLine2.appendChild(productElement); 
-        //addition de tout les prix pour le total du panier
-       // let bigTotal = document.getElementById("#bigTotal");
-        
+        //addition de tout les prix pour le total du panier 
         resultTotal += Number(cameraDecimalPrice * camera.quantity);
         
 
@@ -87,7 +85,7 @@ function change(element){
     let totalPrice = document.getElementById(`detailProduct-${val}`).children[3];
    
     let newPrice = (productList[val].price * Number(element.value))/1000;
-    totalPrice.innerHTML = `${newPrice}`
+    totalPrice.innerHTML = `${(newPrice).toFixed(2)} €`
     
     //Incrémentation et décrémentation de la quantité dans le localstorage
     if (element.value > productList[val].quantity) {
@@ -112,7 +110,9 @@ function change(element){
         bigTotal.innerHTML = `${resultTotal.toFixed(2)} €`;
         
     }
-    
+    if (element.value == 0){
+        deleteItem(val);
+    }
 
 
 

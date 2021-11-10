@@ -1,7 +1,7 @@
 const productElement = document.getElementById("product");
 let params = new URL(document.location).searchParams;
 const cameraId = params.get("id");
-
+//1.Affiche la camera séléctionnée dans la page acceuil.
 function renderProduct(camera) {
   let productItem = document.createElement("div");
   productItem.innerHTML = `
@@ -15,6 +15,7 @@ function renderProduct(camera) {
   productElement.appendChild(productItem);
 }
 
+//2.Récupere la camera correspondante à l'identifiant dans l'URL. 
 fetch(`http://localhost:3000/api/cameras/${cameraId}`)
   .then((response) => response.json())
   .then((camera) => {
@@ -26,11 +27,11 @@ fetch(`http://localhost:3000/api/cameras/${cameraId}`)
     lenseChoice(camera);
     priceItem(camera);
   });
-
+//3.Ajoute l'objet "camera" dans le localStorage.
 function addCameraToBasket(cameraObject) {
   if (!window.localStorage.getItem("camera-basket")) {
     const cameraList = [cameraObject];
-    //Ajout de la clé "quantity" pour chaque item dans le localStorage
+    //4.Ajout de la clé "quantity" pour chaque item dans le localStorage
     cameraObject["quantity"] = 1;
     const cameraListJson = JSON.stringify(cameraList);
     window.localStorage.setItem("camera-basket", cameraListJson);
@@ -57,7 +58,7 @@ function addCameraToBasket(cameraObject) {
       <p>Votre article a été ajouté au panier !</p>
     `;
 }
-
+//5.Choix de la lentille (non retenu dans le LocalStorage).
 function lenseChoice(cameraLense) {
   const lenses = document.getElementById("option");
   lenses.innerHTML = `
@@ -69,21 +70,11 @@ function lenseChoice(cameraLense) {
     <label for="lense-2">${cameraLense.lenses[1]}</label>
   </form>
   `;
-  let elt = document
-    .getElementById("choice")
-    .addEventListener("change", function () {
-      let eltChecked = document.getElementsByClassName("lense");
-      for (i = 0; i < eltChecked.length; i++) {
-        if (eltChecked[i].checked) break;
-      }
-      console.log(eltChecked[i].value);
-      localStorage.setItem("Option", eltChecked[i].value);
-    });
 }
-
+//6.Affiche le prix avec les bonnes décimales.
 function priceItem(cameraPrice) {
   const price1 = document.getElementById("price");
-  const cameraPrice1 = parseFloat(cameraPrice.price) / 1000;
+  const cameraPrice1 = parseFloat(cameraPrice.price) / 100;
   const cameraPriceDecimal = cameraPrice1.toFixed(2);
   price1.innerHTML = `
     <p>Prix: ${cameraPriceDecimal} €</p>

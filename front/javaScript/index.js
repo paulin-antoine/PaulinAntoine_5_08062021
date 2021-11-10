@@ -1,10 +1,10 @@
 const cameraListElement = document.getElementById("cameraList");
-
+//1.affiche tout les objets "camera" dans une grid.
 function renderCameraList(cameras) {
   for (camera of cameras) {
     const cameraElement = document.createElement("a");
     cameraElement.setAttribute("href", `product.html?id=${camera._id}`);
-    const cameraPrice = parseFloat(camera.price) / 1000;
+    const cameraPrice = parseFloat(camera.price) / 100;
     const cameraPriceDecimal = cameraPrice.toFixed(2);
     cameraElement.innerHTML = `
       <div class="bcg-1">
@@ -21,7 +21,7 @@ function renderCameraList(cameras) {
     cameraListElement.appendChild(cameraElement);
   }
 }
-
+//2.Récupere les objets "camera" présents dans le back-end.
 fetch("http://localhost:3000/api/cameras")
   .then((response) => response.json())
   .then((cameras) => renderCameraList(cameras));

@@ -16,7 +16,7 @@ function displayCart() {
   }
 }
 
-// 3. Afficher les informations des produits sur la page panier.html
+// 3.Afficher les informations des produits sur la page cart.html
 function displayProductList(products) {
   const basketLine2 = document.getElementById("basket-line-2");
   basketLine2.innerHTML = `<ul id="basket-line-1">
@@ -45,7 +45,7 @@ function displayProductList(products) {
     camera["select"] = `<input onChange="change(this)"id="${i}"
                             type="number" min="1" max="10" value="${camera.quantity}"> `;
 
-    let cameraEntirePrice = camera.price / 1000;
+    let cameraEntirePrice = camera.price / 100;
     let cameraDecimalPrice = cameraEntirePrice.toFixed(2);
     const productElement = document.createElement("ul");
     productElement.setAttribute("id", `detailProduct-${i}`);
@@ -60,7 +60,7 @@ function displayProductList(products) {
         `;
     i++;
     basketLine2.appendChild(productElement);
-    //addition de tout les prix pour le total du panier
+    //4.Addition de tout les prix pour le total du panier
     resultTotal += Number(cameraDecimalPrice * camera.quantity);
 
     let bigTotal = document.getElementById("bigTotal");
@@ -70,29 +70,29 @@ function displayProductList(products) {
     )} €</div>`;
   }
 }
-//Récuperation de l'id du selecteur de quantité
+//5.Récuperation de l'id du selecteur de quantité
 function change(element) {
   val = Number(element.id);
   let totalPrice = document.getElementById(`detailProduct-${val}`).children[3];
 
-  let newPrice = (productList[val].price * Number(element.value)) / 1000;
+  let newPrice = (productList[val].price * Number(element.value)) / 100;
   totalPrice.innerHTML = `${newPrice.toFixed(2)} €`;
 
-  //Incrémentation et décrémentation de la quantité dans le localstorage
+  //6.Incrémentation et décrémentation de la quantité dans le localstorage
   if (element.value > productList[val].quantity) {
     productList[val].quantity += 1;
 
     window.localStorage.setItem("camera-basket", JSON.stringify(productList));
-    //Mise à jour du grand total
-    resultTotal += productList[val].price / 1000;
+    //7.Mise à jour du grand total
+    resultTotal += productList[val].price / 100;
 
     bigTotal.innerHTML = `${resultTotal.toFixed(2)} €`;
   } else if (element.value < productList[val].quantity) {
     productList[val].quantity -= 1;
 
     window.localStorage.setItem("camera-basket", JSON.stringify(productList));
-    //Mise à jour du grand total
-    resultTotal -= productList[val].price / 1000;
+    //8.Mise à jour du grand total
+    resultTotal -= productList[val].price / 100;
 
     bigTotal.innerHTML = `${resultTotal.toFixed(2)} €`;
   }
@@ -100,7 +100,7 @@ function change(element) {
     deleteItem(val);
   }
 }
-
+//9.Option de suppression de l'article disponible dans le localStorage.
 function deleteItem(element) {
   let productList2 = JSON.parse(window.localStorage.getItem("camera-basket"));
   let newbigTotal = document.getElementById("bigTotal");
@@ -128,8 +128,7 @@ function deleteItem(element) {
 
 displayCart();
 
-//Fonction pour envoyer les données du formulaire au back-end
-
+//10.Fonction pour envoyer les données du formulaire au back-end.
 let order = 0;
 
 function sendToApi() {
@@ -204,7 +203,7 @@ function sendToApi() {
       });
   }
 }
-
+//11.Ajout du prix final et de l'identifiant de commande dans le localStorage.
 function addOrderIdInLocalStorage() {
   let decimalTotal = resultTotal.toFixed(2);
   window.localStorage.setItem("orderId", order);
